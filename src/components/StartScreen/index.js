@@ -54,7 +54,7 @@ export default class StartScreen extends Component {
       UserService
         .login(this.state.email, this.state.password)
         .then(profile => {
-          localStorage['REHACKED_USER_PROFILE'] = JSON.stringify(profile);
+          localStorage['USER_PROFILE'] = JSON.stringify(profile);
           console.log(profile);
 
           var newState = Object.assign({}, this.state);
