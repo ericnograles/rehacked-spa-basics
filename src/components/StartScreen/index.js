@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Login from '../Login';
+import * as UserService from '../../common/services/user';
+import {hashHistory} from 'react-router';
 
 export default class StartScreen extends Component {
   constructor(props) {
@@ -7,8 +9,8 @@ export default class StartScreen extends Component {
 
       this.state = {
         status: 'initial',
-        email: null,
-        password: null
+        email: '',
+        password: ''
       };
 
       this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -47,6 +49,26 @@ export default class StartScreen extends Component {
       this.setState({
         status: 'logging_in'
       });
+
+      var self = this;
+      UserService
+        .login(this.state.email, this.state.password)
+        .then(profile => {
+          localStorage['REHACKED_USER_PROFILE'] = JSON.stringify(profile);
+          console.log(profile);
+
+          var newState = Object.assign({}, this.state);
+          newState.status = 'logged_in';
+          self.setState(newState);
+
+          hashHistory.push('/dashboard');
+        })
+        .catch(error => {
+          var newState = Object.assign({}, this.state);
+          newState.status = 'login_error';
+          self._showSnackBar(error.message);
+          self.setState(newState);
+        });
     }
   }
 
