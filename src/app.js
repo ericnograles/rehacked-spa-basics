@@ -6,18 +6,7 @@ import {render} from 'react-dom';
 import {Router, Route, hashHistory} from 'react-router';
 import StartScreen from './components/StartScreen';
 import Dashboard from './components/Dashboard';
-
-// Images and icons
-//require.context('./assets/images', true, /.*/);
-
-// Vendor JS
-require('../node_modules/material-design-lite/dist/material.min.js');
-
-// Vendor CSS
-require('../node_modules/material-design-lite/dist/material.blue_grey-blue.min.css');
-
-// Stylesheets
-require('./assets/styles/main.scss');
+import './dependencies';
 
 const verifyAuth = (nextState, replace) => {
   var profile = JSON.parse(localStorage['USER_PROFILE'] || '{}');
