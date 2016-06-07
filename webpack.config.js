@@ -13,7 +13,7 @@ const currentEnvironment = process.env.NODE_ENV || 'local';
 const ENV_CONFIG = require('./config/' + currentEnvironment);
 
 module.exports = {
-  context: __dirname + '/src',
+  context: path.resolve(__dirname, 'src'),
   entry: {
     javascript: './app.js',
     html: './index.html'
@@ -77,7 +77,7 @@ module.exports = {
 
   output: {
     filename: 'app.js',
-    path: __dirname + '/build'
+    path: path.resolve(__dirname, 'build')
   },
 
   devtool: ENV_CONFIG.WEBPACK.devtool
