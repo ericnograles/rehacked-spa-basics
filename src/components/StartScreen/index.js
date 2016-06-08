@@ -13,8 +13,8 @@ export default class StartScreen extends Component {
         password: ''
       };
 
-      this.handleFieldChange = this.handleFieldChange.bind(this);
-      this.handleLogin = this.handleLogin.bind(this);
+      this._handleFieldChange = this._handleFieldChange.bind(this);
+      this._handleLogin = this._handleLogin.bind(this);
   }
 
   componentDidMount() {
@@ -25,13 +25,13 @@ export default class StartScreen extends Component {
     componentHandler.upgradeDom();
   }
 
-  handleFieldChange(field, event) {
+  _handleFieldChange(field, event) {
     var newState = Object.assign({}, this.state);
     newState[field] = event.target.value;
     this.setState(newState);
   }
 
-  handleLogin() {
+  _handleLogin() {
     var errors = [];
     if (!this.state.email) {
       errors.push('You must specify an email');
@@ -85,8 +85,8 @@ export default class StartScreen extends Component {
     return (
       <Login email={this.state.email}
         password={this.state.password}
-        handleFieldChange={this.handleFieldChange}
-        handleLogin={this.handleLogin}
+        handleFieldChange={this._handleFieldChange}
+        handleLogin={this._handleLogin}
         loading={this.state.status === 'logging_in'} />
     );
   }
